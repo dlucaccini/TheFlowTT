@@ -14,8 +14,6 @@ import com.diegolucaccini.theflowtt.dal.beans.LocationBean;
 import com.diegolucaccini.theflowtt.dal.contracts.JourneyContract;
 import com.diegolucaccini.theflowtt.dal.contracts.LocationsContract;
 
-import java.math.BigInteger;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -206,11 +204,11 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
                     journey.setAvgAccuracy(avgAccuracy);
                     journey.setMaxSpeed(maxSpeed);
-                    journey.setLocationList(locationsList);
-
-                    journeys.add(journey);
 
                 }
+
+                journey.setLocationList(locationsList);
+                journeys.add(journey);
 
                 locationsCursor.close();
 

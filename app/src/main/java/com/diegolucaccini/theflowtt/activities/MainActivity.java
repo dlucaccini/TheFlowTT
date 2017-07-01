@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FrameLayout dataPanel;
     private TextView accuracyTv;
     private TextView distanceTv;
+    private TextView latTv;
+    private TextView lonTv;
     private BroadcastReceiver mNewPositionReceiver;
     private LatLng mPrevlatLng;
 
@@ -87,6 +89,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         dataPanel = (FrameLayout) findViewById(R.id.data_panel);
         accuracyTv = (TextView) findViewById(R.id.acc_tv);
         distanceTv = (TextView) findViewById(R.id.distance_tv);
+        latTv = (TextView) findViewById(R.id.lat);
+        lonTv = (TextView) findViewById(R.id.lon);
 
         mGoogleApiClientHelper = GoogleApiClientHelper.getInstance(this);
 
@@ -132,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         String distanceTo = ("" + intent.getFloatExtra("distance", -1f));
         distanceTo = distanceTo.length() > 4 ? distanceTo.substring(0, 4) : distanceTo;
         distanceTv.setText("Distance to last: " + distanceTo);
+        latTv.setText("" + location.getLatitude());
+        lonTv.setText("" + location.getLongitude());
 
         if (mGoogleMap != null) {
 

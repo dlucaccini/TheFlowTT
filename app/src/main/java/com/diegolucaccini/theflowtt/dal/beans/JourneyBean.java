@@ -62,7 +62,7 @@ public class JourneyBean implements Serializable {
                 ", endDate='" + endDate + '\'' +
                 ", maxSpeed=" + maxSpeed +
                 ", avgAccuracy=" + avgAccuracy +
-                ", locationList size=" + locationList.size() +
+                ", locationList size=" + (locationList != null ? locationList.size() : "null") +
                 '}';
     }
 }

@@ -23,7 +23,7 @@ public class LocationService extends Service implements LocationListener {
     private static final float MIN_ACCURACY_TRESHOLD = 20f;
     private static final float MIN_DISTANCE_TO_TRESHOLD = 2f;
 
-    private static final boolean IS_DEBUG_MODE = true;
+    private static final boolean IS_DEBUG_MODE = false;
 
     private static JourneyTracker journeyTracker;
 
@@ -80,12 +80,9 @@ public class LocationService extends Service implements LocationListener {
 
         Log.d("diego", "onLocationChanged [" + location.getAccuracy() + "] distance to last [" + (mLastLocation != null ? location.distanceTo(mLastLocation) : -1) + "]");
 
-        boolean locationGood = isLocationGood(location);
-
         Intent broadcastIntent = new Intent(BROADCASTED_LOCATION);
         broadcastIntent.putExtra("location", location);
         broadcastIntent.putExtra("distance", (mLastLocation != null ? location.distanceTo(mLastLocation) : -1f));
-        broadcastIntent.putExtra("isGood", locationGood);
         sendBroadcast(broadcastIntent);
 
         if (isLocationGood(location)) {

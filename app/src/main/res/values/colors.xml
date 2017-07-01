@@ -5,7 +5,6 @@
     <color name="colorAccent">#FF4081</color>
 
 
-    <color name="good">#03fc6f</color>
-    <color name="bad">#f40713</color>
+    <color name="lightGray">#f5f5f5</color>
 
 </resources>
