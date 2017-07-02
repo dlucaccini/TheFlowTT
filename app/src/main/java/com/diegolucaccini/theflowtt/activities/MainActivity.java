@@ -164,7 +164,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             mPrevlatLng = latLng;
 
-
         }
 
     }
@@ -207,7 +206,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lastKnownLatLng, DEFAULT_ZOOM));
 
             } else {
-                Log.d(TAG, "Current location is null. Using defaults.");
                 mGoogleMap.getUiSettings().setMyLocationButtonEnabled(false);
             }
 
@@ -328,9 +326,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Log.i(TAG, "Location settings are not satisfied. Show the user a dialog to upgrade location settings ");
 
                 try {
-                    // Show the dialog by calling startResolutionForResult(), and check the result
-                    // in onActivityResult().
-
                     status.startResolutionForResult(this, REQUEST_CHECK_SETTINGS);
                 } catch (IntentSender.SendIntentException e) {
                     Log.i(TAG, "PendingIntent unable to execute request.");
@@ -375,9 +370,4 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         unregisterReceiver(mNewPositionReceiver);
     }
 
-    public void logDb(View view) {
-
-        DbOpenHelper.getInstance(this).logDatabase();
-
-    }
 }
