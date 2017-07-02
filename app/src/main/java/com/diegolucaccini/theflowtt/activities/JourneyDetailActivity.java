@@ -62,11 +62,22 @@ public class JourneyDetailActivity extends AppCompatActivity implements OnMapRea
 
         ArrayList<LatLng> list = new ArrayList<>();
 
+        int i = 0;
+
         for (LocationBean locationBean : journey.getLocationList()) {
 
             LatLng latLng = new LatLng(locationBean.getLat(), locationBean.getLon());
-            Marker marker = mGoogleMap.addMarker(new MarkerOptions().position(latLng));
-            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.circle_icon));
+
+            if(i == 0) {
+                Marker marker = mGoogleMap.addMarker(new MarkerOptions().position(latLng));
+                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ico_origin));
+            }else if(i == journey.getLocationList().size() - 1) {
+                Marker marker = mGoogleMap.addMarker(new MarkerOptions().position(latLng));
+                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ico_destination));
+            }
+
+            i++;
+
             mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM));
 
             list.add(latLng);

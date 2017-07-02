@@ -50,7 +50,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        Log.d("diego", "SQLiteDatabase onCreate()");
+        Log.d(TAG, "SQLiteDatabase onCreate()");
 
         sqLiteDatabase.execSQL(CREATE_JOURNEY_TABLE);
         sqLiteDatabase.execSQL(CREATE_LOCATIONS_TABLE);

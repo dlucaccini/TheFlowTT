@@ -20,6 +20,7 @@ import java.util.Random;
 public class LocationService extends Service implements LocationListener {
 
     public static final String BROADCASTED_LOCATION = "loc_brd";
+    private static final String TAG = LocationService.class.getSimpleName();
     private static final float MIN_ACCURACY_TRESHOLD = 20f;
     private static final float MIN_DISTANCE_TO_TRESHOLD = 2f;
 
@@ -35,7 +36,7 @@ public class LocationService extends Service implements LocationListener {
     public void onCreate() {
         super.onCreate();
 
-        Log.d("diego", "****** LocationService onCreate");
+        Log.d(TAG, "****** LocationService onCreate");
         GoogleApiClientHelper.getInstance(this).startTrackingJourney(this);
 
         journeyTracker = JourneyTracker.getInstance();
@@ -47,7 +48,7 @@ public class LocationService extends Service implements LocationListener {
     public void onDestroy() {
         super.onDestroy();
 
-        Log.d("diego", "****** LocationService onDestroy");
+        Log.d(TAG, "****** LocationService onDestroy");
         GoogleApiClientHelper.getInstance(this).stopTrackingJourney(this);
 
         journeyTracker.finalizeJourney();
@@ -78,7 +79,7 @@ public class LocationService extends Service implements LocationListener {
             location.setAccuracy(8.0f);
         }
 
-        Log.d("diego", "onLocationChanged [" + location.getAccuracy() + "] distance to last [" + (mLastLocation != null ? location.distanceTo(mLastLocation) : -1) + "]");
+        Log.d(TAG, "onLocationChanged [" + location.getAccuracy() + "] distance to last [" + (mLastLocation != null ? location.distanceTo(mLastLocation) : -1) + "]");
 
         Intent broadcastIntent = new Intent(BROADCASTED_LOCATION);
         broadcastIntent.putExtra("location", location);

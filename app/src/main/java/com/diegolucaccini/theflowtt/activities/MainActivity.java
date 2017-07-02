@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 100;
 
-    private static final float DEFAULT_ZOOM = 15;
+    private static final float DEFAULT_ZOOM = 18;
 
     private static final int REQUEST_CHECK_SETTINGS = 0x1;
 
@@ -103,6 +103,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     stopService(new Intent(MainActivity.this, LocationService.class));
                     doTrackJourney = false;
                     enableTrackLocationGUI(false);
+                    if(mPrevlatLng != null) {
+                        Marker marker = mGoogleMap.addMarker(new MarkerOptions().position(mPrevlatLng));
+                        marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ico_destination));
+                    }
                 } else {
                     mGoogleMap.clear();
                     mPrevlatLng = null;
@@ -139,12 +143,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         latTv.setText("" + location.getLatitude());
         lonTv.setText("" + location.getLongitude());
 
-        if (mGoogleMap != null) {
+        if (mGoogleMap != null && doTrackJourney) {
 
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-            Marker marker = mGoogleMap.addMarker(new MarkerOptions().position(latLng));
-            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.circle_icon));
+            if(mPrevlatLng == null) {
+                Marker marker = mGoogleMap.addMarker(new MarkerOptions().position(latLng));
+                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ico_origin));
+            }
+
             mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM));
 
             if(mPrevlatLng != null) {

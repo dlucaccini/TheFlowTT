@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 public class JourneysListActivity extends AppCompatActivity {
 
+    private static final String TAG = JourneysListActivity.class.getSimpleName();
+
     private ArrayList<JourneyBean> journeysData;
     private JourneyAdapter adapter;
 
@@ -29,7 +31,7 @@ public class JourneysListActivity extends AppCompatActivity {
 
         journeysData = DbOpenHelper.getInstance(this).getJourneys();
 
-        Log.d("diego", "" + journeysData.toString());
+        Log.d(TAG, "" + journeysData.toString());
 
         adapter = new JourneyAdapter();
 
